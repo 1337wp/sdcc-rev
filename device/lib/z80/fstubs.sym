@@ -1,0 +1,12 @@
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+
+Symbol Table
+
+    ___slong2fs                                                    **** GX
+  0 ___slong2fs_rrx_s                                              0000 GR
+
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Area Table
+
+   0 _CODE                                                          size    3   flags 0

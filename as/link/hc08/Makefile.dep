@@ -1,0 +1,18 @@
+lkmain.o: lkmain.c ../aslink.h
+lkarea.o: lkarea.c ../aslink.h
+lkihx.o: lkihx.c ../aslink.h
+lklibr.o: lklibr.c ../aslink.h
+lkrloc.o: lkrloc.c ../aslink.h
+lks19.o: lks19.c ../aslink.h
+lkelf.o: lkelf.c ../aslink.h ../../../sdccconf.h
+lkmem.o: lkmem.c ../aslink.h
+lkaomf51.o: ../lkaomf51.c ../aslink.h
+lkdata.o: ../lkdata.c ../aslink.h
+lkeval.o: ../lkeval.c ../aslink.h
+lkhead.o: ../lkhead.c ../aslink.h
+lklex.o: ../lklex.c ../aslink.h
+lklist.o: ../lklist.c ../aslink.h
+lknoice.o: ../lknoice.c ../aslink.h
+lkstore.o: ../lkstore.c ../aslink.h
+lksym.o: ../lksym.c ../aslink.h
+strcmpi.o: ../../asxxsrc/strcmpi.c

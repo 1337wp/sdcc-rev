@@ -1,0 +1,20 @@
+XL
+H 7 areas 3 global symbols
+M _strlen
+O -mz80
+A _CODE size 1E flags 0
+S _strlen_start Def0000
+S _strlen_end Def001E
+S _strlen Def0000
+A _DATA size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _HOME size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _CABS size 0 flags 0
+T 00 00 DD E5 DD 21 00 00 DD 39 01 00 00 DD 5E 04
+R 00 00 00 00
+T 0E 00 DD 56 05 1A 13 B7 28 03 03 18 F8 69 60 DD
+R 00 00 00 00
+T 1C 00 E1 C9
+R 00 00 00 00

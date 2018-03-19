@@ -1,0 +1,11 @@
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+
+Symbol Table
+
+  0 __initrleblock                                                 0000 GR
+
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Area Table
+
+   0 _CODE                                                          size   27   flags 0

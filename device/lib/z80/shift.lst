@@ -1,0 +1,85 @@
+                              1         ;;
+   0000                       2 __rrulong_rrx_s::
+   0000 21 06 00              3         ld      hl,#2+4
+   0003 39                    4         add     hl,sp
+                              5 
+   0004 4E                    6         ld      c,(hl)
+   0005 2B                    7         dec     hl
+   0006 56                    8         ld      d,(hl)
+   0007 2B                    9         dec     hl
+   0008 5E                   10         ld      e,(hl)
+   0009 2B                   11         dec     hl
+   000A 7E                   12         ld      a,(hl)
+   000B 2B                   13         dec     hl
+   000C 6E                   14         ld      l,(hl)
+   000D 67                   15         ld      h,a
+                             16 
+   000E 79                   17         ld      a,c
+   000F                      18 1$:
+   000F B7                   19         or      a,a
+   0010 C8                   20         ret     Z
+                             21 
+   0011 CB 1A                22         rr      d
+   0013 CB 1B                23         rr      e
+   0015 CB 1C                24         rr      h
+   0017 CB 1D                25         rr      l
+                             26 
+   0019 3D                   27         dec     a
+   001A C3r0Fs00             28         jp      1$
+                             29 
+   001D                      30 __rrslong_rrx_s::
+   001D 21 06 00             31         ld      hl,#2+4
+   0020 39                   32         add     hl,sp
+                             33 
+   0021 4E                   34         ld      c,(hl)
+   0022 2B                   35         dec     hl
+   0023 56                   36         ld      d,(hl)
+   0024 2B                   37         dec     hl
+   0025 5E                   38         ld      e,(hl)
+   0026 2B                   39         dec     hl
+   0027 7E                   40         ld      a,(hl)
+   0028 2B                   41         dec     hl
+   0029 6E                   42         ld      l,(hl)
+   002A 67                   43         ld      h,a
+                             44 
+   002B 79                   45         ld      a,c
+   002C                      46 1$:
+   002C B7                   47         or      a,a
+   002D C8                   48         ret     Z
+                             49 
+   002E CB 2A                50         sra     d
+   0030 CB 1B                51         rr      e
+   0032 CB 1C                52         rr      h
+   0034 CB 1D                53         rr      l
+                             54 
+   0036 3D                   55         dec     a
+   0037 C3r2Cs00             56         jp      1$
+                             57 
+   003A                      58 __rlslong_rrx_s::
+   003A                      59 __rlulong_rrx_s::
+   003A 21 06 00             60         ld      hl,#2+4
+   003D 39                   61         add     hl,sp
+                             62 
+   003E 4E                   63         ld      c,(hl)
+   003F 2B                   64         dec     hl
+   0040 56                   65         ld      d,(hl)
+   0041 2B                   66         dec     hl
+   0042 5E                   67         ld      e,(hl)
+   0043 2B                   68         dec     hl
+   0044 7E                   69         ld      a,(hl)
+   0045 2B                   70         dec     hl
+   0046 6E                   71         ld      l,(hl)
+   0047 67                   72         ld      h,a
+                             73 
+   0048 79                   74         ld      a,c
+   0049                      75 1$:
+   0049 B7                   76         or      a,a
+   004A C8                   77         ret     Z
+                             78 
+   004B CB 15                79         rl      l
+   004D CB 14                80         rl      h
+   004F CB 13                81         rl      e
+   0051 CB 12                82         rl      d
+                             83 
+   0053 3D                   84         dec     a
+   0054 C3r49s00             85         jp      1$

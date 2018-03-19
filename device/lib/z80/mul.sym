@@ -1,0 +1,19 @@
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+
+Symbol Table
+
+  0 .mul16                                                         0034 R
+  0 __mulint_rrx_hds                                               0032 GR
+  0 __mulint_rrx_s                                                 0026 GR
+  0 __mulschar_rrx_hds                                             001A GR
+  0 __mulschar_rrx_s                                               0013 GR
+  0 __muluchar_rrx_hds                                             0032 GR
+  0 __muluchar_rrx_s                                               0000 GR
+  0 muluchar_rrx_s_loop                                            000C R
+  0 muluchar_rrx_s_noadd                                           0010 R
+
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Area Table
+
+   0 _CODE                                                          size   4B   flags 0

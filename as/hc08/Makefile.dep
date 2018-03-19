@@ -1,0 +1,18 @@
+asmain.o: asmain.c asm.h
+assubr.o: assubr.c asm.h
+asexpr.o: asexpr.c asm.h
+asdata.o: asdata.c asm.h
+aslist.o: aslist.c asm.h
+asout.o: asout.c asm.h
+m08ext.o: m08ext.c asm.h m6808.h
+m08pst.o: m08pst.c asm.h m6808.h
+m08mch.o: m08mch.c asm.h m6808.h
+m08adr.o: m08adr.c asm.h m6808.h
+strcmpi.o: ../asxxsrc/strcmpi.c
+assym.o: ../asxxsrc/assym.c asm.h
+aslex.o: ../asxxsrc/aslex.c ../../support/Util/dbuf_string.h \
+ ../../support/Util/dbuf.h asm.h
+asnoice.o: ../asxxsrc/asnoice.c asm.h
+dbuf.o: ../../support/Util/dbuf.c ../../support/Util/dbuf.h
+dbuf_string.o: ../../support/Util/dbuf_string.c \
+ ../../support/Util/dbuf_string.h ../../support/Util/dbuf.h

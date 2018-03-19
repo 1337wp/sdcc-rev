@@ -1,0 +1,13 @@
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+
+Symbol Table
+
+  0 _putchar                                                       0000 GR
+  0 _putchar_rr_dbs                                                0009 GR
+  0 _putchar_rr_s                                                  0000 GR
+
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Area Table
+
+   0 _CODE                                                          size    E   flags 0

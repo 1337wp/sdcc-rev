@@ -1,0 +1,927 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.8.0 #5117 (Mar 14 2018) (UNIX)
+                              4 ; This file was generated Wed Mar 14 01:15:02 2018
+                              5 ;--------------------------------------------------------
+                              6 	.module printf
+                              7 	.optsdcc -mgbz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl __buf_emitter
+                             13 	.globl __char_emitter
+                             14 	.globl __printf
+                             15 	.globl _printf
+                             16 	.globl _sprintf
+                             17 ;--------------------------------------------------------
+                             18 ;  ram data
+                             19 ;--------------------------------------------------------
+                             20 	.area _DATA
+                             21 ;--------------------------------------------------------
+                             22 ; overlayable items in  ram 
+                             23 ;--------------------------------------------------------
+                             24 	.area _OVERLAY
+                             25 ;--------------------------------------------------------
+                             26 ; external initialized ram data
+                             27 ;--------------------------------------------------------
+                             28 ;--------------------------------------------------------
+                             29 ; global & static initialisations
+                             30 ;--------------------------------------------------------
+                             31 	.area _HOME
+                             32 	.area _GSINIT
+                             33 	.area _GSFINAL
+                             34 	.area _GSINIT
+                             35 ;--------------------------------------------------------
+                             36 ; Home
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _HOME
+                             40 ;--------------------------------------------------------
+                             41 ; code
+                             42 ;--------------------------------------------------------
+                             43 	.area _CODE
+                             44 ;printf.c:10: static void _printn(unsigned u, unsigned base, char issigned, void (*emitter)(char, void *), void *pData)
+                             45 ;	genLabel
+                             46 ;	genFunction
+                             47 ;	---------------------------------
+                             48 ; Function _printn
+                             49 ; ---------------------------------
+   0000                      50 __printn:
+                             51 	
+                             52 ;printf.c:12: const char *_hex = "0123456789ABCDEF";
+                             53 ;printf.c:13: if (issigned && ((int)u < 0)) {
+                             54 ;	genIfx
+                             55 ;	AOP_STK for 
+   0000 AF                   56 	xor	a,a
+   0001 F8 06                57 	lda	hl,6(sp)
+   0003 B6                   58 	or	a,(hl)
+   0004 CAr36s00             59 	jp	Z,00102$
+                             60 ;	genAssign
+                             61 ;	AOP_STK for 
+   0007 F8 02                62 	lda	hl,2(sp)
+   0009 4E                   63 	ld	c,(hl)
+   000A 23                   64 	inc	hl
+   000B 46                   65 	ld	b,(hl)
+                             66 ;	genCmpLt
+   000C 78                   67 	ld	a,b
+   000D CB 7F                68 	bit	7,a
+   000F CAr36s00             69 	jp	Z,00102$
+                             70 ;printf.c:14: (*emitter)('-', pData);
+                             71 ;	genIpush
+                             72 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0012 C5                   73 	push	bc
+                             74 ;	AOP_STK for 
+   0013 F8 0B                75 	lda	hl,11(sp)
+   0015 2A                   76 	ld	a,(hl+)
+   0016 66                   77 	ld	h,(hl)
+   0017 6F                   78 	ld	l,a
+   0018 E5                   79 	push	hl
+                             80 ;	genIpush
+   0019 3E 2D                81 	ld	a,#0x2D
+   001B F5                   82 	push	af
+   001C 33                   83 	inc	sp
+                             84 ;	genPcall
+                             85 ;	AOP_STK for 
+   001D 21r27s00             86 	ld	hl,#00111$
+   0020 E5                   87 	push	hl
+   0021 F8 0E                88 	lda	hl,14(sp)
+   0023 2A                   89 	ld	a,(hl+)
+   0024 66                   90 	ld	h,(hl)
+   0025 6F                   91 	ld	l,a
+   0026 E9                   92 	jp	(hl)
+   0027                      93 00111$:
+   0027 E8 03                94 	lda	sp,3(sp)
+   0029 C1                   95 	pop	bc
+                             96 ;printf.c:15: u = (unsigned)-((int)u);
+                             97 ;	genAssign
+                             98 ;	(registers are the same)
+                             99 ;	genUminus
+   002A AF                  100 	xor	a,a
+   002B 99                  101 	sbc	a,c
+   002C 4F                  102 	ld	c,a
+   002D 3E 00               103 	ld	a,#0x00
+   002F 98                  104 	sbc	a,b
+   0030 47                  105 	ld	b,a
+                            106 ;	genAssign
+                            107 ;	AOP_STK for 
+   0031 F8 02               108 	lda	hl,2(sp)
+   0033 71                  109 	ld	(hl),c
+   0034 23                  110 	inc	hl
+   0035 70                  111 	ld	(hl),b
+                            112 ;	genLabel
+   0036                     113 00102$:
+                            114 ;printf.c:17: if (u >= base)
+                            115 ;	genCmpLt
+                            116 ;	AOP_STK for 
+                            117 ;	AOP_STK for 
+   0036 F8 02               118 	lda	hl,2(sp)
+   0038 54                  119 	ld	d,h
+   0039 5D                  120 	ld	e,l
+   003A 23                  121 	inc	hl
+   003B 23                  122 	inc	hl
+   003C 1A                  123 	ld	a,(de)
+   003D 96                  124 	sub	a,(hl)
+   003E 23                  125 	inc	hl
+   003F 13                  126 	inc	de
+   0040 1A                  127 	ld	a,(de)
+   0041 9E                  128 	sbc	a,(hl)
+   0042 DAr74s00            129 	jp	C,00105$
+                            130 ;printf.c:18: _printn(u/base, base, 0, emitter, pData);
+                            131 ;	genIpush
+                            132 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            133 ;	AOP_STK for 
+   0045 F8 04               134 	lda	hl,4(sp)
+   0047 2A                  135 	ld	a,(hl+)
+   0048 66                  136 	ld	h,(hl)
+   0049 6F                  137 	ld	l,a
+   004A E5                  138 	push	hl
+                            139 ;	genIpush
+                            140 ;	AOP_STK for 
+   004B F8 04               141 	lda	hl,4(sp)
+   004D 2A                  142 	ld	a,(hl+)
+   004E 66                  143 	ld	h,(hl)
+   004F 6F                  144 	ld	l,a
+   0050 E5                  145 	push	hl
+                            146 ;	genCall
+   0051 CDr00s00            147 	call	__divuint_rrx_s
+   0054 42                  148 	ld	b,d
+   0055 4B                  149 	ld	c,e
+   0056 E8 04               150 	lda	sp,4(sp)
+                            151 ;	genIpush
+                            152 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            153 ;	AOP_STK for 
+   0058 F8 09               154 	lda	hl,9(sp)
+   005A 2A                  155 	ld	a,(hl+)
+   005B 66                  156 	ld	h,(hl)
+   005C 6F                  157 	ld	l,a
+   005D E5                  158 	push	hl
+                            159 ;	genIpush
+                            160 ;	AOP_STK for 
+   005E F8 09               161 	lda	hl,9(sp)
+   0060 2A                  162 	ld	a,(hl+)
+   0061 66                  163 	ld	h,(hl)
+   0062 6F                  164 	ld	l,a
+   0063 E5                  165 	push	hl
+                            166 ;	genIpush
+   0064 3E 00               167 	ld	a,#0x00
+   0066 F5                  168 	push	af
+   0067 33                  169 	inc	sp
+                            170 ;	genIpush
+                            171 ;	AOP_STK for 
+   0068 F8 09               172 	lda	hl,9(sp)
+   006A 2A                  173 	ld	a,(hl+)
+   006B 66                  174 	ld	h,(hl)
+   006C 6F                  175 	ld	l,a
+   006D E5                  176 	push	hl
+                            177 ;	genIpush
+   006E C5                  178 	push	bc
+                            179 ;	genCall
+   006F CDr00s00            180 	call	__printn
+   0072 E8 09               181 	lda	sp,9(sp)
+                            182 ;	genLabel
+   0074                     183 00105$:
+                            184 ;printf.c:19: (*emitter)(_hex[u%base], pData);
+                            185 ;	genIpush
+                            186 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            187 ;	AOP_STK for 
+   0074 F8 04               188 	lda	hl,4(sp)
+   0076 2A                  189 	ld	a,(hl+)
+   0077 66                  190 	ld	h,(hl)
+   0078 6F                  191 	ld	l,a
+   0079 E5                  192 	push	hl
+                            193 ;	genIpush
+                            194 ;	AOP_STK for 
+   007A F8 04               195 	lda	hl,4(sp)
+   007C 2A                  196 	ld	a,(hl+)
+   007D 66                  197 	ld	h,(hl)
+   007E 6F                  198 	ld	l,a
+   007F E5                  199 	push	hl
+                            200 ;	genCall
+   0080 CDr00s00            201 	call	__moduint_rrx_s
+   0083 42                  202 	ld	b,d
+   0084 4B                  203 	ld	c,e
+   0085 E8 04               204 	lda	sp,4(sp)
+                            205 ;	genPlus
+   0087 21rA5s00            206 	ld	hl,#__str_0
+   008A 09                  207 	add	hl,bc
+   008B 4D                  208 	ld	c,l
+   008C 44                  209 	ld	b,h
+                            210 ;	genPointerGet
+   008D 0A                  211 	ld	a,(bc)
+   008E 4F                  212 	ld	c,a
+                            213 ;	genIpush
+                            214 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            215 ;	AOP_STK for 
+   008F F8 09               216 	lda	hl,9(sp)
+   0091 2A                  217 	ld	a,(hl+)
+   0092 66                  218 	ld	h,(hl)
+   0093 6F                  219 	ld	l,a
+   0094 E5                  220 	push	hl
+                            221 ;	genIpush
+   0095 79                  222 	ld	a,c
+   0096 F5                  223 	push	af
+   0097 33                  224 	inc	sp
+                            225 ;	genPcall
+                            226 ;	AOP_STK for 
+   0098 21rA2s00            227 	ld	hl,#00112$
+   009B E5                  228 	push	hl
+   009C F8 0C               229 	lda	hl,12(sp)
+   009E 2A                  230 	ld	a,(hl+)
+   009F 66                  231 	ld	h,(hl)
+   00A0 6F                  232 	ld	l,a
+   00A1 E9                  233 	jp	(hl)
+   00A2                     234 00112$:
+   00A2 E8 03               235 	lda	sp,3(sp)
+                            236 ;	genLabel
+   00A4                     237 00106$:
+                            238 ;	genEndFunction
+                            239 	
+   00A4 C9                  240 	ret
+   00A5                     241 __str_0:
+   00A5 30 31 32 33 34 35   242 	.ascii "0123456789ABCDEF"
+        36 37 38 39 41 42
+        43 44 45 46
+   00B5 00                  243 	.db 0x00
+                            244 ;printf.c:22: STATIC void _printf(const char *format, void (*emitter)(char, void *), void *pData, va_list va)
+                            245 ;	genLabel
+                            246 ;	genFunction
+                            247 ;	---------------------------------
+                            248 ; Function _printf
+                            249 ; ---------------------------------
+   00B6                     250 __printf_start::
+   00B6                     251 __printf:
+   00B6 E8 FE               252 	lda	sp,-2(sp)
+                            253 ;printf.c:24: while (*format) {
+                            254 ;	genLabel
+   00B8                     255 00113$:
+                            256 ;	genAssign
+                            257 ;	AOP_STK for 
+   00B8 F8 04               258 	lda	hl,4(sp)
+   00BA 4E                  259 	ld	c,(hl)
+   00BB 23                  260 	inc	hl
+   00BC 46                  261 	ld	b,(hl)
+                            262 ;	genPointerGet
+                            263 ;	AOP_STK for __printf__1_0
+   00BD 0A                  264 	ld	a,(bc)
+   00BE F8 01               265 	lda	hl,1(sp)
+                            266 ;	genIfx
+                            267 ;	AOP_STK for __printf__1_0
+   00C0 77                  268 	ld	(hl),a
+   00C1 B7                  269 	or	a,a
+   00C2 CAr21s02            270 	jp	Z,00116$
+                            271 ;printf.c:25: if (*format == '%') {
+                            272 ;	genCmpEq
+                            273 ;	AOP_STK for __printf__1_0
+                            274 ; genCmpEq: left 1, right 1, result 0
+   00C5 7E                  275 	ld	a,(hl)
+   00C6 D6 25               276 	sub	a,#0x25
+   00C8 C2rCDs00            277 	jp	NZ,00129$
+   00CB 18 03               278 	jr	00130$
+   00CD                     279 00129$:
+   00CD C3rF8s01            280 	jp	00111$
+   00D0                     281 00130$:
+                            282 ;printf.c:26: switch (*++format) {
+                            283 ;	genPlus
+                            284 ;	AOP_STK for 
+                            285 ;	genPlusIncr
+   00D0 21 01 00            286 	ld	hl,#0x0001
+   00D3 09                  287 	add	hl,bc
+   00D4 7D                  288 	ld	a,l
+   00D5 54                  289 	ld	d,h
+   00D6 F8 04               290 	lda	hl,4(sp)
+   00D8 22                  291 	ld	(hl+),a
+   00D9 72                  292 	ld	(hl),d
+                            293 ;	genAssign
+                            294 ;	AOP_STK for 
+   00DA 2B                  295 	dec	hl
+   00DB 4E                  296 	ld	c,(hl)
+   00DC 23                  297 	inc	hl
+   00DD 46                  298 	ld	b,(hl)
+                            299 ;	genPointerGet
+   00DE 0A                  300 	ld	a,(bc)
+                            301 ;	genCmpEq
+                            302 ; genCmpEq: left 1, right 1, result 0
+   00DF 4F                  303 	ld	c,a
+   00E0 D6 63               304 	sub	a,#0x63
+   00E2 CAr00s01            305 	jp	Z,00101$
+   00E5                     306 00131$:
+                            307 ;	genCmpEq
+                            308 ; genCmpEq: left 1, right 1, result 0
+   00E5 79                  309 	ld	a,c
+   00E6 D6 64               310 	sub	a,#0x64
+   00E8 CAr5Ds01            311 	jp	Z,00103$
+   00EB                     312 00132$:
+                            313 ;	genCmpEq
+                            314 ; genCmpEq: left 1, right 1, result 0
+   00EB 79                  315 	ld	a,c
+   00EC D6 73               316 	sub	a,#0x73
+   00EE CArBFs01            317 	jp	Z,00105$
+   00F1                     318 00133$:
+                            319 ;	genCmpEq
+                            320 ; genCmpEq: left 1, right 1, result 0
+   00F1 79                  321 	ld	a,c
+   00F2 D6 75               322 	sub	a,#0x75
+   00F4 CAr2Cs01            323 	jp	Z,00102$
+   00F7                     324 00134$:
+                            325 ;	genCmpEq
+                            326 ; genCmpEq: left 1, right 1, result 0
+   00F7 79                  327 	ld	a,c
+   00F8 D6 78               328 	sub	a,#0x78
+   00FA CAr8Es01            329 	jp	Z,00104$
+   00FD                     330 00135$:
+                            331 ;	genGoto
+   00FD C3r0Fs02            332 	jp	00112$
+                            333 ;printf.c:27: case 'c': {
+                            334 ;	genLabel
+   0100                     335 00101$:
+                            336 ;printf.c:28: char c = (char)va_arg(va, int);
+                            337 ;	genPlus
+                            338 ;	AOP_STK for 
+                            339 ;	genPlusIncr
+   0100 F8 0A               340 	lda	hl,10(sp)
+   0102 4E                  341 	ld	c,(hl)
+   0103 23                  342 	inc	hl
+   0104 46                  343 	ld	b,(hl)
+   0105 03                  344 	inc	bc
+   0106 03                  345 	inc	bc
+                            346 ;	genAssign
+                            347 ;	AOP_STK for 
+   0107 2B                  348 	dec	hl
+   0108 71                  349 	ld	(hl),c
+   0109 23                  350 	inc	hl
+   010A 70                  351 	ld	(hl),b
+                            352 ;	genMinus
+   010B 0B                  353 	dec	bc
+   010C 0B                  354 	dec	bc
+                            355 ;	genPointerGet
+   010D 59                  356 	ld	e,c
+   010E 50                  357 	ld	d,b
+   010F 1A                  358 	ld	a,(de)
+   0110 4F                  359 	ld	c,a
+   0111 13                  360 	inc	de
+   0112 1A                  361 	ld	a,(de)
+   0113 47                  362 	ld	b,a
+                            363 ;	genCast
+                            364 ;printf.c:29: (*emitter)(c, pData);
+                            365 ;	genIpush
+                            366 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            367 ;	AOP_STK for 
+   0114 F8 08               368 	lda	hl,8(sp)
+   0116 2A                  369 	ld	a,(hl+)
+   0117 66                  370 	ld	h,(hl)
+   0118 6F                  371 	ld	l,a
+   0119 E5                  372 	push	hl
+                            373 ;	genIpush
+   011A 79                  374 	ld	a,c
+   011B F5                  375 	push	af
+   011C 33                  376 	inc	sp
+                            377 ;	genPcall
+                            378 ;	AOP_STK for 
+   011D 21r27s01            379 	ld	hl,#00136$
+   0120 E5                  380 	push	hl
+   0121 F8 0B               381 	lda	hl,11(sp)
+   0123 2A                  382 	ld	a,(hl+)
+   0124 66                  383 	ld	h,(hl)
+   0125 6F                  384 	ld	l,a
+   0126 E9                  385 	jp	(hl)
+   0127                     386 00136$:
+   0127 E8 03               387 	lda	sp,3(sp)
+                            388 ;printf.c:30: break;
+                            389 ;	genGoto
+   0129 C3r0Fs02            390 	jp	00112$
+                            391 ;printf.c:32: case 'u':
+                            392 ;	genLabel
+   012C                     393 00102$:
+                            394 ;printf.c:34: unsigned u = va_arg(va, unsigned);
+                            395 ;	genPlus
+                            396 ;	AOP_STK for 
+                            397 ;	genPlusIncr
+   012C F8 0A               398 	lda	hl,10(sp)
+   012E 4E                  399 	ld	c,(hl)
+   012F 23                  400 	inc	hl
+   0130 46                  401 	ld	b,(hl)
+   0131 03                  402 	inc	bc
+   0132 03                  403 	inc	bc
+                            404 ;	genAssign
+                            405 ;	AOP_STK for 
+   0133 2B                  406 	dec	hl
+   0134 71                  407 	ld	(hl),c
+   0135 23                  408 	inc	hl
+   0136 70                  409 	ld	(hl),b
+                            410 ;	genMinus
+   0137 0B                  411 	dec	bc
+   0138 0B                  412 	dec	bc
+                            413 ;	genPointerGet
+   0139 59                  414 	ld	e,c
+   013A 50                  415 	ld	d,b
+   013B 1A                  416 	ld	a,(de)
+   013C 4F                  417 	ld	c,a
+   013D 13                  418 	inc	de
+   013E 1A                  419 	ld	a,(de)
+   013F 47                  420 	ld	b,a
+                            421 ;	genAssign
+                            422 ;	(registers are the same)
+                            423 ;printf.c:35: _printn(u, 10, 0, emitter, pData);
+                            424 ;	genIpush
+                            425 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            426 ;	AOP_STK for 
+   0140 F8 08               427 	lda	hl,8(sp)
+   0142 2A                  428 	ld	a,(hl+)
+   0143 66                  429 	ld	h,(hl)
+   0144 6F                  430 	ld	l,a
+   0145 E5                  431 	push	hl
+                            432 ;	genIpush
+                            433 ;	AOP_STK for 
+   0146 F8 08               434 	lda	hl,8(sp)
+   0148 2A                  435 	ld	a,(hl+)
+   0149 66                  436 	ld	h,(hl)
+   014A 6F                  437 	ld	l,a
+   014B E5                  438 	push	hl
+                            439 ;	genIpush
+   014C 3E 00               440 	ld	a,#0x00
+   014E F5                  441 	push	af
+   014F 33                  442 	inc	sp
+                            443 ;	genIpush
+   0150 21 0A 00            444 	ld	hl,#0x000A
+   0153 E5                  445 	push	hl
+                            446 ;	genIpush
+   0154 C5                  447 	push	bc
+                            448 ;	genCall
+   0155 CDr00s00            449 	call	__printn
+   0158 E8 09               450 	lda	sp,9(sp)
+                            451 ;printf.c:36: break;
+                            452 ;	genGoto
+   015A C3r0Fs02            453 	jp	00112$
+                            454 ;printf.c:38: case 'd':
+                            455 ;	genLabel
+   015D                     456 00103$:
+                            457 ;printf.c:40: unsigned u = va_arg(va, unsigned);
+                            458 ;	genPlus
+                            459 ;	AOP_STK for 
+                            460 ;	genPlusIncr
+   015D F8 0A               461 	lda	hl,10(sp)
+   015F 4E                  462 	ld	c,(hl)
+   0160 23                  463 	inc	hl
+   0161 46                  464 	ld	b,(hl)
+   0162 03                  465 	inc	bc
+   0163 03                  466 	inc	bc
+                            467 ;	genAssign
+                            468 ;	AOP_STK for 
+   0164 2B                  469 	dec	hl
+   0165 71                  470 	ld	(hl),c
+   0166 23                  471 	inc	hl
+   0167 70                  472 	ld	(hl),b
+                            473 ;	genMinus
+   0168 0B                  474 	dec	bc
+   0169 0B                  475 	dec	bc
+                            476 ;	genPointerGet
+   016A 59                  477 	ld	e,c
+   016B 50                  478 	ld	d,b
+   016C 1A                  479 	ld	a,(de)
+   016D 4F                  480 	ld	c,a
+   016E 13                  481 	inc	de
+   016F 1A                  482 	ld	a,(de)
+   0170 47                  483 	ld	b,a
+                            484 ;	genAssign
+                            485 ;	(registers are the same)
+                            486 ;printf.c:41: _printn(u, 10, 1, emitter, pData);
+                            487 ;	genIpush
+                            488 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            489 ;	AOP_STK for 
+   0171 F8 08               490 	lda	hl,8(sp)
+   0173 2A                  491 	ld	a,(hl+)
+   0174 66                  492 	ld	h,(hl)
+   0175 6F                  493 	ld	l,a
+   0176 E5                  494 	push	hl
+                            495 ;	genIpush
+                            496 ;	AOP_STK for 
+   0177 F8 08               497 	lda	hl,8(sp)
+   0179 2A                  498 	ld	a,(hl+)
+   017A 66                  499 	ld	h,(hl)
+   017B 6F                  500 	ld	l,a
+   017C E5                  501 	push	hl
+                            502 ;	genIpush
+   017D 3E 01               503 	ld	a,#0x01
+   017F F5                  504 	push	af
+   0180 33                  505 	inc	sp
+                            506 ;	genIpush
+   0181 21 0A 00            507 	ld	hl,#0x000A
+   0184 E5                  508 	push	hl
+                            509 ;	genIpush
+   0185 C5                  510 	push	bc
+                            511 ;	genCall
+   0186 CDr00s00            512 	call	__printn
+   0189 E8 09               513 	lda	sp,9(sp)
+                            514 ;printf.c:42: break;
+                            515 ;	genGoto
+   018B C3r0Fs02            516 	jp	00112$
+                            517 ;printf.c:44: case 'x':
+                            518 ;	genLabel
+   018E                     519 00104$:
+                            520 ;printf.c:46: unsigned u = va_arg(va, unsigned);
+                            521 ;	genPlus
+                            522 ;	AOP_STK for 
+                            523 ;	genPlusIncr
+   018E F8 0A               524 	lda	hl,10(sp)
+   0190 4E                  525 	ld	c,(hl)
+   0191 23                  526 	inc	hl
+   0192 46                  527 	ld	b,(hl)
+   0193 03                  528 	inc	bc
+   0194 03                  529 	inc	bc
+                            530 ;	genAssign
+                            531 ;	AOP_STK for 
+   0195 2B                  532 	dec	hl
+   0196 71                  533 	ld	(hl),c
+   0197 23                  534 	inc	hl
+   0198 70                  535 	ld	(hl),b
+                            536 ;	genMinus
+   0199 0B                  537 	dec	bc
+   019A 0B                  538 	dec	bc
+                            539 ;	genPointerGet
+   019B 59                  540 	ld	e,c
+   019C 50                  541 	ld	d,b
+   019D 1A                  542 	ld	a,(de)
+   019E 4F                  543 	ld	c,a
+   019F 13                  544 	inc	de
+   01A0 1A                  545 	ld	a,(de)
+   01A1 47                  546 	ld	b,a
+                            547 ;	genAssign
+                            548 ;	(registers are the same)
+                            549 ;printf.c:47: _printn(u, 16, 0, emitter, pData);
+                            550 ;	genIpush
+                            551 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            552 ;	AOP_STK for 
+   01A2 F8 08               553 	lda	hl,8(sp)
+   01A4 2A                  554 	ld	a,(hl+)
+   01A5 66                  555 	ld	h,(hl)
+   01A6 6F                  556 	ld	l,a
+   01A7 E5                  557 	push	hl
+                            558 ;	genIpush
+                            559 ;	AOP_STK for 
+   01A8 F8 08               560 	lda	hl,8(sp)
+   01AA 2A                  561 	ld	a,(hl+)
+   01AB 66                  562 	ld	h,(hl)
+   01AC 6F                  563 	ld	l,a
+   01AD E5                  564 	push	hl
+                            565 ;	genIpush
+   01AE 3E 00               566 	ld	a,#0x00
+   01B0 F5                  567 	push	af
+   01B1 33                  568 	inc	sp
+                            569 ;	genIpush
+   01B2 21 10 00            570 	ld	hl,#0x0010
+   01B5 E5                  571 	push	hl
+                            572 ;	genIpush
+   01B6 C5                  573 	push	bc
+                            574 ;	genCall
+   01B7 CDr00s00            575 	call	__printn
+   01BA E8 09               576 	lda	sp,9(sp)
+                            577 ;printf.c:48: break;
+                            578 ;	genGoto
+   01BC C3r0Fs02            579 	jp	00112$
+                            580 ;printf.c:50: case 's':
+                            581 ;	genLabel
+   01BF                     582 00105$:
+                            583 ;printf.c:52: char *s = va_arg(va, char *);
+                            584 ;	genPlus
+                            585 ;	AOP_STK for 
+                            586 ;	genPlusIncr
+   01BF F8 0A               587 	lda	hl,10(sp)
+   01C1 4E                  588 	ld	c,(hl)
+   01C2 23                  589 	inc	hl
+   01C3 46                  590 	ld	b,(hl)
+   01C4 03                  591 	inc	bc
+   01C5 03                  592 	inc	bc
+                            593 ;	genAssign
+                            594 ;	AOP_STK for 
+   01C6 2B                  595 	dec	hl
+   01C7 71                  596 	ld	(hl),c
+   01C8 23                  597 	inc	hl
+   01C9 70                  598 	ld	(hl),b
+                            599 ;	genMinus
+   01CA 0B                  600 	dec	bc
+   01CB 0B                  601 	dec	bc
+                            602 ;	genPointerGet
+   01CC 59                  603 	ld	e,c
+   01CD 50                  604 	ld	d,b
+   01CE 1A                  605 	ld	a,(de)
+   01CF 4F                  606 	ld	c,a
+   01D0 13                  607 	inc	de
+   01D1 1A                  608 	ld	a,(de)
+   01D2 47                  609 	ld	b,a
+                            610 ;	genAssign
+                            611 ;	(registers are the same)
+                            612 ;printf.c:53: while (*s) {
+                            613 ;	genAssign
+                            614 ;	(registers are the same)
+                            615 ;	genLabel
+   01D3                     616 00106$:
+                            617 ;	genPointerGet
+                            618 ;	AOP_STK for __printf__1_0
+   01D3 0A                  619 	ld	a,(bc)
+   01D4 F8 00               620 	lda	hl,0(sp)
+                            621 ;	genIfx
+                            622 ;	AOP_STK for __printf__1_0
+   01D6 77                  623 	ld	(hl),a
+   01D7 B7                  624 	or	a,a
+   01D8 CAr0Fs02            625 	jp	Z,00112$
+                            626 ;printf.c:54: (*emitter)(*s, pData);
+                            627 ;	genIpush
+                            628 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01DB C5                  629 	push	bc
+                            630 ;	AOP_STK for 
+   01DC F8 0A               631 	lda	hl,10(sp)
+   01DE 2A                  632 	ld	a,(hl+)
+   01DF 66                  633 	ld	h,(hl)
+   01E0 6F                  634 	ld	l,a
+   01E1 E5                  635 	push	hl
+                            636 ;	genIpush
+                            637 ;	AOP_STK for __printf__1_0
+   01E2 F8 04               638 	lda	hl,4(sp)
+   01E4 7E                  639 	ld	a,(hl)
+   01E5 F5                  640 	push	af
+   01E6 33                  641 	inc	sp
+                            642 ;	genPcall
+                            643 ;	AOP_STK for 
+   01E7 21rF1s01            644 	ld	hl,#00137$
+   01EA E5                  645 	push	hl
+   01EB F8 0D               646 	lda	hl,13(sp)
+   01ED 2A                  647 	ld	a,(hl+)
+   01EE 66                  648 	ld	h,(hl)
+   01EF 6F                  649 	ld	l,a
+   01F0 E9                  650 	jp	(hl)
+   01F1                     651 00137$:
+   01F1 E8 03               652 	lda	sp,3(sp)
+   01F3 C1                  653 	pop	bc
+                            654 ;printf.c:55: s++;
+                            655 ;	genPlus
+                            656 ;	genPlusIncr
+   01F4 03                  657 	inc	bc
+                            658 ;	genGoto
+   01F5 C3rD3s01            659 	jp	00106$
+                            660 ;printf.c:58: }
+                            661 ;	genLabel
+   01F8                     662 00111$:
+                            663 ;printf.c:61: (*emitter)(*format, pData);
+                            664 ;	genIpush
+                            665 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            666 ;	AOP_STK for 
+   01F8 F8 08               667 	lda	hl,8(sp)
+   01FA 2A                  668 	ld	a,(hl+)
+   01FB 66                  669 	ld	h,(hl)
+   01FC 6F                  670 	ld	l,a
+   01FD E5                  671 	push	hl
+                            672 ;	genIpush
+                            673 ;	AOP_STK for __printf__1_0
+   01FE F8 03               674 	lda	hl,3(sp)
+   0200 7E                  675 	ld	a,(hl)
+   0201 F5                  676 	push	af
+   0202 33                  677 	inc	sp
+                            678 ;	genPcall
+                            679 ;	AOP_STK for 
+   0203 21r0Ds02            680 	ld	hl,#00138$
+   0206 E5                  681 	push	hl
+   0207 F8 0B               682 	lda	hl,11(sp)
+   0209 2A                  683 	ld	a,(hl+)
+   020A 66                  684 	ld	h,(hl)
+   020B 6F                  685 	ld	l,a
+   020C E9                  686 	jp	(hl)
+   020D                     687 00138$:
+   020D E8 03               688 	lda	sp,3(sp)
+                            689 ;	genLabel
+   020F                     690 00112$:
+                            691 ;printf.c:63: format++;
+                            692 ;	genAssign
+                            693 ;	AOP_STK for 
+   020F F8 04               694 	lda	hl,4(sp)
+   0211 4E                  695 	ld	c,(hl)
+   0212 23                  696 	inc	hl
+   0213 46                  697 	ld	b,(hl)
+                            698 ;	genPlus
+                            699 ;	AOP_STK for 
+                            700 ;	genPlusIncr
+   0214 21 01 00            701 	ld	hl,#0x0001
+   0217 09                  702 	add	hl,bc
+   0218 7D                  703 	ld	a,l
+   0219 54                  704 	ld	d,h
+   021A F8 04               705 	lda	hl,4(sp)
+   021C 22                  706 	ld	(hl+),a
+   021D 72                  707 	ld	(hl),d
+                            708 ;	genGoto
+   021E C3rB8s00            709 	jp	00113$
+                            710 ;	genLabel
+   0221                     711 00116$:
+                            712 ;	genEndFunction
+   0221 E8 02               713 	lda	sp,2(sp)
+   0223 C9                  714 	ret
+   0224                     715 __printf_end::
+                            716 ;printf.c:69: STATIC void _char_emitter(char c, void *pData)
+                            717 ;	genLabel
+                            718 ;	genFunction
+                            719 ;	---------------------------------
+                            720 ; Function _char_emitter
+                            721 ; ---------------------------------
+   0224                     722 __char_emitter_start::
+   0224                     723 __char_emitter:
+                            724 	
+                            725 ;printf.c:74: putchar(c);
+                            726 ;	genIpush
+                            727 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            728 ;	AOP_STK for 
+   0224 F8 02               729 	lda	hl,2(sp)
+   0226 7E                  730 	ld	a,(hl)
+   0227 F5                  731 	push	af
+   0228 33                  732 	inc	sp
+                            733 ;	genCall
+   0229 CDr00s00            734 	call	_putchar
+   022C E8 01               735 	lda	sp,1(sp)
+                            736 ;	genLabel
+   022E                     737 00101$:
+                            738 ;	genEndFunction
+                            739 	
+   022E C9                  740 	ret
+   022F                     741 __char_emitter_end::
+                            742 ;printf.c:77: int printf(const char *format, ...)
+                            743 ;	genLabel
+                            744 ;	genFunction
+                            745 ;	---------------------------------
+                            746 ; Function printf
+                            747 ; ---------------------------------
+   022F                     748 _printf_start::
+   022F                     749 _printf:
+                            750 	
+                            751 ;printf.c:80: va_start(va, format);
+                            752 ;	genAddrOf
+   022F F8 02               753 	lda	hl,2(sp)
+   0231 4D                  754 	ld	c,l
+   0232 44                  755 	ld	b,h
+                            756 ;	genPlus
+                            757 ;	genPlusIncr
+   0233 03                  758 	inc	bc
+   0234 03                  759 	inc	bc
+                            760 ;printf.c:82: _printf(format, _char_emitter, NULL, va);
+                            761 ;	genIpush
+                            762 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0235 C5                  763 	push	bc
+                            764 ;	genIpush
+   0236 21 00 00            765 	ld	hl,#0x0000
+   0239 E5                  766 	push	hl
+                            767 ;	genIpush
+   023A 21r24s02            768 	ld	hl,#__char_emitter
+   023D E5                  769 	push	hl
+                            770 ;	genIpush
+                            771 ;	AOP_STK for 
+   023E F8 08               772 	lda	hl,8(sp)
+   0240 2A                  773 	ld	a,(hl+)
+   0241 66                  774 	ld	h,(hl)
+   0242 6F                  775 	ld	l,a
+   0243 E5                  776 	push	hl
+                            777 ;	genCall
+   0244 CDrB6s00            778 	call	__printf
+   0247 E8 08               779 	lda	sp,8(sp)
+                            780 ;printf.c:85: return 0;
+                            781 ;	genRet
+                            782 ; Dump of IC_LEFT: type AOP_LIT size 2
+   0249 11 00 00            783 	ld	de,#0x0000
+                            784 ;	genLabel
+   024C                     785 00101$:
+                            786 ;	genEndFunction
+                            787 	
+   024C C9                  788 	ret
+   024D                     789 _printf_end::
+                            790 ;printf.c:88: STATIC void _buf_emitter(char c, void *pData)
+                            791 ;	genLabel
+                            792 ;	genFunction
+                            793 ;	---------------------------------
+                            794 ; Function _buf_emitter
+                            795 ; ---------------------------------
+   024D                     796 __buf_emitter_start::
+   024D                     797 __buf_emitter:
+   024D E8 FE               798 	lda	sp,-2(sp)
+                            799 ;printf.c:90: *((*((char **)pData)))++ = c;
+                            800 ;	genAssign
+                            801 ;	(operands are equal 3)
+                            802 ;	genPointerGet
+                            803 ;	AOP_STK for 
+                            804 ;	AOP_STK for __buf_emitter__1_0
+   024F F8 05               805 	lda	hl,5(sp)
+   0251 5E                  806 	ld	e,(hl)
+   0252 23                  807 	inc	hl
+   0253 56                  808 	ld	d,(hl)
+   0254 1A                  809 	ld	a,(de)
+   0255 F8 00               810 	lda	hl,0(sp)
+   0257 22                  811 	ld	(hl+),a
+   0258 13                  812 	inc	de
+   0259 1A                  813 	ld	a,(de)
+                            814 ;	genPlus
+                            815 ;	AOP_STK for __buf_emitter__1_0
+                            816 ;	genPlusIncr
+   025A 32                  817 	ld	(hl-),a
+   025B 4E                  818 	ld	c,(hl)
+   025C 23                  819 	inc	hl
+   025D 46                  820 	ld	b,(hl)
+   025E 03                  821 	inc	bc
+                            822 ;	genAssign (pointer)
+                            823 ;	AOP_STK for 
+                            824 ;	isBitvar = 0
+   025F F8 05               825 	lda	hl,5(sp)
+   0261 5E                  826 	ld	e,(hl)
+   0262 23                  827 	inc	hl
+   0263 56                  828 	ld	d,(hl)
+   0264 79                  829 	ld	a,c
+   0265 12                  830 	ld	(de),a
+   0266 13                  831 	inc	de
+   0267 78                  832 	ld	a,b
+   0268 12                  833 	ld	(de),a
+                            834 ;	genAssign (pointer)
+                            835 ;	AOP_STK for __buf_emitter__1_0
+                            836 ;	AOP_STK for 
+                            837 ;	isBitvar = 0
+   0269 F8 00               838 	lda	hl,0(sp)
+   026B 5E                  839 	ld	e,(hl)
+   026C 23                  840 	inc	hl
+   026D 56                  841 	ld	d,(hl)
+   026E F8 04               842 	lda	hl,4(sp)
+   0270 7E                  843 	ld	a,(hl)
+   0271 12                  844 	ld	(de),a
+                            845 ;	genLabel
+   0272                     846 00101$:
+                            847 ;	genEndFunction
+   0272 E8 02               848 	lda	sp,2(sp)
+   0274 C9                  849 	ret
+   0275                     850 __buf_emitter_end::
+                            851 ;printf.c:93: int sprintf(char *pInto, const char *format, ...)
+                            852 ;	genLabel
+                            853 ;	genFunction
+                            854 ;	---------------------------------
+                            855 ; Function sprintf
+                            856 ; ---------------------------------
+   0275                     857 _sprintf_start::
+   0275                     858 _sprintf:
+   0275 E8 FE               859 	lda	sp,-2(sp)
+                            860 ;printf.c:96: va_start(va, format);
+                            861 ;	genAddrOf
+   0277 F8 06               862 	lda	hl,6(sp)
+   0279 4D                  863 	ld	c,l
+   027A 44                  864 	ld	b,h
+                            865 ;	genPlus
+                            866 ;	AOP_STK for _sprintf_va_1_1
+                            867 ;	genPlusIncr
+   027B 21 02 00            868 	ld	hl,#0x0002
+   027E 09                  869 	add	hl,bc
+   027F 7D                  870 	ld	a,l
+   0280 54                  871 	ld	d,h
+   0281 F8 00               872 	lda	hl,0(sp)
+   0283 22                  873 	ld	(hl+),a
+   0284 72                  874 	ld	(hl),d
+                            875 ;printf.c:98: _printf(format, _buf_emitter, &pInto, va);
+                            876 ;	genAddrOf
+   0285 F8 04               877 	lda	hl,4(sp)
+   0287 4D                  878 	ld	c,l
+   0288 44                  879 	ld	b,h
+                            880 ;	genIpush
+                            881 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            882 ;	AOP_STK for _sprintf_va_1_1
+   0289 F8 00               883 	lda	hl,0(sp)
+   028B 2A                  884 	ld	a,(hl+)
+   028C 66                  885 	ld	h,(hl)
+   028D 6F                  886 	ld	l,a
+   028E E5                  887 	push	hl
+                            888 ;	genIpush
+   028F C5                  889 	push	bc
+                            890 ;	genIpush
+   0290 21r4Ds02            891 	ld	hl,#__buf_emitter
+   0293 E5                  892 	push	hl
+                            893 ;	genIpush
+                            894 ;	AOP_STK for 
+   0294 F8 0C               895 	lda	hl,12(sp)
+   0296 2A                  896 	ld	a,(hl+)
+   0297 66                  897 	ld	h,(hl)
+   0298 6F                  898 	ld	l,a
+   0299 E5                  899 	push	hl
+                            900 ;	genCall
+   029A CDrB6s00            901 	call	__printf
+   029D E8 08               902 	lda	sp,8(sp)
+                            903 ;printf.c:99: *pInto++ = '\0';
+                            904 ;	genAssign
+                            905 ;	AOP_STK for 
+   029F F8 04               906 	lda	hl,4(sp)
+   02A1 4E                  907 	ld	c,(hl)
+   02A2 23                  908 	inc	hl
+   02A3 46                  909 	ld	b,(hl)
+                            910 ;	genAssign (pointer)
+                            911 ;	isBitvar = 0
+   02A4 3E 00               912 	ld	a,#0x00
+   02A6 02                  913 	ld	(bc),a
+                            914 ;printf.c:102: return 0;
+                            915 ;	genRet
+                            916 ; Dump of IC_LEFT: type AOP_LIT size 2
+   02A7 11 00 00            917 	ld	de,#0x0000
+                            918 ;	genLabel
+   02AA                     919 00101$:
+                            920 ;	genEndFunction
+   02AA E8 02               921 	lda	sp,2(sp)
+   02AC C9                  922 	ret
+   02AD                     923 _sprintf_end::
+                            924 	.area _CODE
+                            925 	.area _CABS

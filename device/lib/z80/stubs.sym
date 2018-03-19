@@ -1,0 +1,55 @@
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+
+Symbol Table
+
+  0 __divschar_rrf_s                                               0027 GR
+    __divschar_rrx_s                                               **** GX
+  0 __divsint_rrf_s                                                0015 GR
+    __divsint_rrx_s                                                **** GX
+    __divslong                                                     **** GX
+  0 __divslong_rrf_s                                               0009 GR
+  0 __divslong_rrx_s                                               0009 GR
+  0 __divuchar_rrf_s                                               0033 GR
+    __divuchar_rrx_s                                               **** GX
+  0 __divuint_rrf_s                                                001B GR
+    __divuint_rrx_s                                                **** GX
+    __divulong                                                     **** GX
+  0 __divulong_rrf_s                                               000C GR
+  0 __divulong_rrx_s                                               000C GR
+  0 __modschar_rrf_s                                               0039 GR
+    __modschar_rrx_s                                               **** GX
+  0 __modsint_rrf_s                                                0045 GR
+    __modsint_rrx_s                                                **** GX
+    __modslong                                                     **** GX
+  0 __modslong_rrf_s                                               0003 GR
+  0 __modslong_rrx_s                                               0003 GR
+  0 __moduchar_rrf_s                                               003F GR
+    __moduchar_rrx_s                                               **** GX
+  0 __moduint_rrf_s                                                004B GR
+    __moduint_rrx_s                                                **** GX
+    __modulong                                                     **** GX
+  0 __modulong_rrf_s                                               0006 GR
+  0 __modulong_rrx_s                                               0006 GR
+  0 __mulint_rrf_s                                                 000F GR
+    __mulint_rrx_s                                                 **** GX
+    __mullong                                                      **** GX
+  0 __mullong_rrf_s                                                0000 GR
+  0 __mullong_rrx_s                                                0000 GR
+  0 __mulschar_rrf_s                                               0021 GR
+    __mulschar_rrx_s                                               **** GX
+  0 __muluchar_rrf_s                                               002D GR
+    __muluchar_rrx_s                                               **** GX
+  0 __rlslong_rrf_s                                                0063 GR
+    __rlslong_rrx_s                                                **** GX
+  0 __rlulong_rrf_s                                                005D GR
+    __rlulong_rrx_s                                                **** GX
+  0 __rrslong_rrf_s                                                0057 GR
+    __rrslong_rrx_s                                                **** GX
+  0 __rrulong_rrf_s                                                0051 GR
+    __rrulong_rrx_s                                                **** GX
+
+ASxxxx Assembler V01.75 + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Area Table
+
+   0 _CODE                                                          size   69   flags 0
